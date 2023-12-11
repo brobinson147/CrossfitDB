@@ -13,7 +13,7 @@ import java.lang.System.exit
 
 private val logger = KotlinLogging.logger {}
 //private val noteAPI = NoteAPI(XMLSerializer(File("notes.xml")))
-private val noteAPI = NoteAPI(JSONSerializer(File("notes.json")))
+private val competitorAPI = CompetitorAPI(JSONSerializer(File("notes.json")))
 
 fun main(args: Array<String>) {
     runMenu()
@@ -58,7 +58,7 @@ fun runMenu() {
     } while (true)
 }
 
-fun addNote(){
+fun addCompetitor(){
     //logger.info { "addNote() function invoked" }
     val noteTitle = readNextLine("Enter a title for the note: ")
     val notePriority = readValidPriority("Enter a priority (1-low, 2, 3, 4, 5-high): ")
