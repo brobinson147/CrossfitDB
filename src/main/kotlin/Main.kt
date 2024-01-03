@@ -1,5 +1,3 @@
-import controllers.NoteAPI
-import models.Note
 import mu.KotlinLogging
 import persistence.JSONSerializer
 import utils.CategoryUtility
