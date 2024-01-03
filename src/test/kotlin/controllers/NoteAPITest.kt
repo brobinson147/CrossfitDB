@@ -1,6 +1,5 @@
 package controllers
 
-import models.Note
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import persistence.JSONSerializer
