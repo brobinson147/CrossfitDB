@@ -1,15 +1,19 @@
 // Main.kt
+import models.Compete
 import mu.KotlinLogging
 import persistence.JSONSerializer
+import utils.CategoryUtility
 import java.io.File
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
 import utils.ValidateInput.readValidCategory
 import utils.ValidateInput.readValidPriority
 import java.lang.System.exit
+import java.util.concurrent.atomic.AtomicInteger
 
 private val logger = KotlinLogging.logger {}
 private val competitorAPI = CompetitorAPI(JSONSerializer(File("competitors.json")))
+private val competitorIdCounter = AtomicInteger(1)
 
 fun main(args: Array<String>) {
     runMenu()
@@ -65,14 +69,52 @@ fun addCompetitor() {
 }
 
 fun listCompetitors() {
-
+    val competitors = competitorAPI.getAllCompetitors()
+    if (competitors.isEmpty()) {
+        println("No competitors found.")
+    } else {
+        println("Competitors:")
+        for ((index, competitor) in competitors.withIndex()) {
+            println("$index: $competitor")
+        }
+    }
 }
 
+fun lastCompetitorId(): Int = competitorIdCounter.get()
+
 fun addCompetition() {
+    val date = readNextLine("Enter the date of the competition: ")
+    val title = readNextLine("Enter the title of the competition: ")
+    val category = readValidCategory("Enter the category of the competition from ${CategoryUtility.categories}: ")
+    val place = readNextLine("Enter the place of the competition: ")
+    val numberOfWorkoutAttempted = readNextInt("Enter the number of workouts attempted: ")
+    val numberOfWorkoutsCompleted = readNextInt("Enter the number of workouts completed: ")
+
+    val competitorId = readNextInt("Enter the ID of the competitor for this competition (use 0 for none): ")
+    val competitor = competitorAPI.getCompetitorById(competitorId)
+
+    val isAdded = competitorAPI.addCompetition(
+        Compete(date, title, category, place, numberOfWorkoutAttempted, numberOfWorkoutsCompleted, competitor)
+    )
+
+    if (isAdded) {
+        println("Competition Added Successfully")
+    } else {
+        println("Add Competition Failed")
+    }
 
 }
 
 fun listCompetitions() {
+    val competitions = competitorAPI.getAllCompetitions()
+    if (competitions.isEmpty()) {
+        println("No competitions found.")
+    } else {
+        println("Competitions:")
+        for ((index, competition) in competitions.withIndex()) {
+            println("$index: $competition")
+        }
+    }
 
 }
 
@@ -97,5 +139,4 @@ fun exitApp() {
     exit(0)
 }
 
-// Add the utility function lastCompetitorId() here
 
