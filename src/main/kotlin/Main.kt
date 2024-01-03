@@ -7,9 +7,11 @@ import utils.ScannerInput.readNextLine
 import utils.ValidateInput.readValidCategory
 import utils.ValidateInput.readValidPriority
 import java.lang.System.exit
+import java.util.concurrent.atomic.AtomicInteger
 
 private val logger = KotlinLogging.logger {}
 private val competitorAPI = CompetitorAPI(JSONSerializer(File("competitors.json")))
+private val competitorIdCounter = AtomicInteger(1)
 
 fun main(args: Array<String>) {
     runMenu()
@@ -65,8 +67,18 @@ fun addCompetitor() {
 }
 
 fun listCompetitors() {
-
+    val competitors = competitorAPI.getAllCompetitors()
+    if (competitors.isEmpty()) {
+        println("No competitors found.")
+    } else {
+        println("Competitors:")
+        for ((index, competitor) in competitors.withIndex()) {
+            println("$index: $competitor")
+        }
+    }
 }
+
+fun lastCompetitorId(): Int = competitorIdCounter.get()
 
 fun addCompetition() {
 
@@ -96,6 +108,7 @@ fun exitApp() {
     logger.info { "Exiting Application" }
     exit(0)
 }
+
 
 // Add the utility function lastCompetitorId() here
 
