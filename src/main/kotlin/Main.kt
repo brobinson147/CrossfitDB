@@ -170,6 +170,11 @@ fun addCompetition() {
     val competitorId = readNextInt("Enter the ID of the competitor for this competition (use 0 for none): ")
     val competitor = competitorAPI.getCompetitorById(competitorId)
 
+    if (competitor == null && competitorId != 0) {
+        println("Invalid competitor ID. Please enter a valid ID or use 0 for none.")
+        return
+    }
+
     val isAdded = competitorAPI.addCompetition(
         Compete(date.toInt(), title, category, place, numberOfWorkoutAttempted.toString(), numberOfWorkoutsCompleted, competitor)
     )
@@ -179,7 +184,6 @@ fun addCompetition() {
     } else {
         println("Add Competition Failed")
     }
-
 }
 
 fun listCompetitions() {
