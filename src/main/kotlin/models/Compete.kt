@@ -9,4 +9,5 @@ data class Compete(
     var numberOfWorkoutAttempted: Int,
     var numberOfWorkoutsCompleted: Int)
 {
+    var isCompetitionArchived: Boolean = false
 }

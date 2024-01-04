@@ -1,5 +1,6 @@
 package controllers
 
+import models.Compete
 import models.Competitor
 import persistence.Serializer
 
@@ -8,23 +9,28 @@ class CompetitorAPI(serializerType: Serializer) {
     private var serializer: Serializer = serializerType
 
     private var competitors = ArrayList<Competitor>()
-    private var competitions = ArrayList<Competition>()
+    private var competitions = ArrayList<Compete>()
+
+    fun formatListString(itemsToFormat: List<Any>): String =
+        itemsToFormat.joinToString(separator = "\n") { item ->
+            // Implement the logic to format each item as a string
+            item.toString()
+        }
 
     fun addCompetitor(competitor: Competitor): Boolean {
         return competitors.add(competitor)
     }
 
-    fun addCompetition(competition: Competition): Boolean {
+    fun addCompetition(competition: Compete): Boolean {
         return competitions.add(competition)
     }
 
-    // Existing methods...
 
     fun listActiveCompetitions(): String =
         if (numberOfActiveCompetitions() == 0) "No active competitions stored"
         else formatListString(competitions.filter { competition -> !competition.isCompetitionArchived })
 
-    fun numberOfActiveCompetitions(): Int = competitions.count { competition: Competition -> !competition.isCompetitionArchived }
+    fun numberOfActiveCompetitions(): Int = competitions.count { competition: Compete -> !competition.isCompetitionArchived }
 
     fun archiveCompetition(indexToArchive: Int): Boolean {
         if (isValidCompetitionIndex(indexToArchive)) {
@@ -37,15 +43,27 @@ class CompetitorAPI(serializerType: Serializer) {
         return false
     }
 
+    fun updateCompetition(index: Int, competition: Compete): Boolean {
+        if (isValidCompetitionIndex(index)) {
+            competitions[index] = competition
+            return true
+        }
+        return false
+    }
+
+
     private fun isValidCompetitionIndex(index: Int): Boolean {
         return (index >= 0 && index < competitions.size)
     }
 
+    fun getCompetitorById(competitorId: Int): Competitor? {
+        return competitors.find { it.id == competitorId }
+    }
 
     @Throws(Exception::class)
     fun load() {
         // Load both competitors and competitions from the serializer
-        val loadedData = serializer.read() as Pair<ArrayList<Competitor>, ArrayList<Competition>>
+        val loadedData = serializer.read() as Pair<ArrayList<Competitor>, ArrayList<Compete>>
         competitors = loadedData.first
         competitions = loadedData.second
     }

@@ -1,4 +1,6 @@
+import controllers.CompetitorAPI
 import models.Compete
+import models.Competitor
 import mu.KotlinLogging
 import persistence.JSONSerializer
 import utils.CategoryUtility
@@ -54,6 +56,7 @@ fun runMenu() {
 }
 
 
+
 fun addCompetitor() {
     val name = readNextLine("Enter competitor name: ")
     val affiliation = readNextLine("Enter competitor affiliation: ")
@@ -82,7 +85,7 @@ fun listCompetitors() {
 fun updateCompetition() {
     listCompetitions()
 
-    if (competitorAPI.numberOfCompetitions() > 0) {
+    if (competitorAPI.numberOfActiveCompetitions() > 0) {
         val indexToUpdate = readNextInt("Enter the index of the competition to update: ")
 
         if (competitorAPI.isValidCompetitionIndex(indexToUpdate)) {
