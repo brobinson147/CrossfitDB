@@ -8,7 +8,6 @@ import java.io.File
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
 import utils.ValidateInput.readValidCategory
-import utils.ValidateInput.readValidPriority
 import java.lang.System.exit
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -30,6 +29,9 @@ fun mainMenu(): Int {
          > |   2) List Competitors              |
          > |   3) Add Competition               |
          > |   4) List Competitions             |
+         > |   5) Update Competition            |
+         > |   6) Archive Competition           |
+         > |   7) Delete Competition            |
          > -------------------------------------
          > |   20) Save Data                    |
          > |   21) Load Data                    |
@@ -138,7 +140,7 @@ fun deleteCompetition() {
 }
 
 fun archiveCompetition() {
-    listActiveCompetions()
+    listActiveCompetitions()
 
     if (competitorAPI.numberOfActiveCompetitions() > 0) {
         val indexToArchive = readNextInt("Enter the index of the competition to archive: ")

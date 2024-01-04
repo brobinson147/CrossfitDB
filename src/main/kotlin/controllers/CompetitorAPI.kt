@@ -72,6 +72,10 @@ class CompetitorAPI(serializerType: Serializer) {
         return competitions.toList()
     }
 
+    fun getAllCompetitors(): List<Competitor> {
+        return competitors.toList()
+    }
+
     @Throws(Exception::class)
     fun load() {
         // Load both competitors and competitions from the serializer
