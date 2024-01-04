@@ -21,6 +21,14 @@ class CompetitorAPI(serializerType: Serializer) {
         return competitors.add(competitor)
     }
 
+    fun deleteCompetition(index: Int): Compete? {
+        return if (isValidCompetitionIndex(index)) {
+            competitions.removeAt(index)
+        } else {
+            null
+        }
+    }
+
     fun addCompetition(competition: Compete): Boolean {
         return competitions.add(competition)
     }
@@ -58,6 +66,10 @@ class CompetitorAPI(serializerType: Serializer) {
 
     fun getCompetitorById(competitorId: Int): Competitor? {
         return competitors.find { it.id == competitorId }
+    }
+
+    fun getAllCompetitions(): List<Compete> {
+        return competitions.toList()
     }
 
     @Throws(Exception::class)

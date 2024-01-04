@@ -47,6 +47,9 @@ fun runMenu() {
             2 -> listCompetitors()
             3 -> addCompetition()
             4 -> listCompetitions()
+            5 -> updateCompetition()
+            6 -> archiveCompetition()
+            7 -> deleteCompetition()
             20 -> saveData()
             21 -> loadData()
             0 -> exitApp()
@@ -119,7 +122,7 @@ fun updateCompetition() {
 fun deleteCompetition() {
     listCompetitions()
 
-    if (competitorAPI.numberOfCompetitions() > 0) {
+    if (competitorAPI.numberOfActiveCompetitions() > 0) {
         val indexToDelete = readNextInt("Enter the index of the competition to delete: ")
 
         val competitionToDelete = competitorAPI.deleteCompetition(indexToDelete)
@@ -135,7 +138,7 @@ fun deleteCompetition() {
 }
 
 fun archiveCompetition() {
-    listActiveCompetitions()
+    listActiveCompetions()
 
     if (competitorAPI.numberOfActiveCompetitions() > 0) {
         val indexToArchive = readNextInt("Enter the index of the competition to archive: ")
