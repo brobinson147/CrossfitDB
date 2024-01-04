@@ -1,5 +1,6 @@
 package controllers
 
+import models.Compete
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import persistence.JSONSerializer
@@ -9,13 +10,13 @@ import kotlin.test.assertEquals
 
 class NoteAPITest {
 
-    private var learnKotlin: Note? = null
-    private var summerHoliday: Note? = null
-    private var codeApp: Note? = null
-    private var testApp: Note? = null
-    private var swim: Note? = null
-    private var populatedNotes: NoteAPI? = NoteAPI(XMLSerializer(File("notes.xml")))
-    private var emptyNotes: NoteAPI? = NoteAPI(XMLSerializer(File("notes.xml")))
+    private var learnKotlin: Compete? = null
+    private var summerHoliday: Compete? = null
+    private var codeApp: Compete? = null
+    private var testApp: Compete? = null
+    private var swim: Compete? = null
+    private var populatedNotes: CompetitorAPI? = CompetitorAPI(XMLSerializer(File("notes.xml")))
+    private var emptyNotes: CompetitorAPI? = CompetitorAPI(XMLSerializer(File("notes.xml")))
 
     @BeforeEach
     fun setup(){

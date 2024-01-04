@@ -33,6 +33,7 @@ fun mainMenu(): Int {
          > |   6) Archive Competition           |
          > |   7) Delete Competition            |
          > -------------------------------------
+         > 
          > |   20) Save Data                    |
          > |   21) Load Data                    |
          > -------------------------------------
@@ -104,11 +105,12 @@ fun updateCompetition() {
             val competitorId = readNextInt("Enter the ID of the competitor for this competition (use 0 for none): ")
             val competitor = competitorAPI.getCompetitorById(competitorId)
 
-            if (competitorAPI.updateCompetition(
-                    indexToUpdate,
-                    Compete(date, title, category, place, numberOfWorkoutAttempted, numberOfWorkoutsCompleted, competitor)
-                )
-            ) {
+            val isUpdated = competitorAPI.updateCompetition(
+                indexToUpdate,
+                Compete(date.toInt(), title, category, place, numberOfWorkoutAttempted.toString(), numberOfWorkoutsCompleted, competitor)
+            )
+
+            if (isUpdated) {
                 println("Update Successful")
             } else {
                 println("Update Failed")
@@ -169,7 +171,7 @@ fun addCompetition() {
     val competitor = competitorAPI.getCompetitorById(competitorId)
 
     val isAdded = competitorAPI.addCompetition(
-        Compete(date, title, category, place, numberOfWorkoutAttempted, numberOfWorkoutsCompleted, competitor)
+        Compete(date.toInt(), title, category, place, numberOfWorkoutAttempted.toString(), numberOfWorkoutsCompleted, competitor)
     )
 
     if (isAdded) {

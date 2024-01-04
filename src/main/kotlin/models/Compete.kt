@@ -7,7 +7,8 @@ data class Compete(
     var categoryAttempted: String,
     var place: String,
     var numberOfWorkoutAttempted: Int,
-    var numberOfWorkoutsCompleted: Int)
+    var numberOfWorkoutsCompleted: Competitor?
+)
 {
     var isCompetitionArchived: Boolean = false
 }

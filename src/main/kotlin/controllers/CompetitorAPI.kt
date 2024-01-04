@@ -51,9 +51,9 @@ class CompetitorAPI(serializerType: Serializer) {
         return false
     }
 
-    fun updateCompetition(index: Int, competition: Compete): Boolean {
-        if (isValidCompetitionIndex(index)) {
-            competitions[index] = competition
+    fun updateCompetition(indexToUpdate: Int, competition: Compete): Boolean {
+        if (isValidCompetitionIndex(indexToUpdate)) {
+            competitions[indexToUpdate] = competition
             return true
         }
         return false
