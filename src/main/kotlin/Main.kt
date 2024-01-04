@@ -131,6 +131,22 @@ fun deleteCompetition() {
     }
 }
 
+fun archiveCompetition() {
+    listActiveCompetitions()
+
+    if (competitorAPI.numberOfActiveCompetitions() > 0) {
+        val indexToArchive = readNextInt("Enter the index of the competition to archive: ")
+
+        if (competitorAPI.archiveCompetition(indexToArchive)) {
+            println("Archive Successful!")
+        } else {
+            println("Archive NOT Successful")
+        }
+    } else {
+        println("No active competitions to archive")
+    }
+}
+
 fun lastCompetitorId(): Int = competitorIdCounter.get()
 
 fun addCompetition() {
