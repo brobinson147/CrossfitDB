@@ -1,4 +1,3 @@
-// Main.kt
 import models.Compete
 import mu.KotlinLogging
 import persistence.JSONSerializer
@@ -77,6 +76,40 @@ fun listCompetitors() {
         for ((index, competitor) in competitors.withIndex()) {
             println("$index: $competitor")
         }
+    }
+}
+
+fun updateCompetition() {
+    listCompetitions()
+
+    if (competitorAPI.numberOfCompetitions() > 0) {
+        val indexToUpdate = readNextInt("Enter the index of the competition to update: ")
+
+        if (competitorAPI.isValidCompetitionIndex(indexToUpdate)) {
+            val date = readNextLine("Enter the date of the competition: ")
+            val title = readNextLine("Enter the title of the competition: ")
+            val category = readValidCategory("Enter the category of the competition from ${CategoryUtility.categories}: ")
+            val place = readNextLine("Enter the place of the competition: ")
+            val numberOfWorkoutAttempted = readNextInt("Enter the number of workouts attempted: ")
+            val numberOfWorkoutsCompleted = readNextInt("Enter the number of workouts completed: ")
+
+            val competitorId = readNextInt("Enter the ID of the competitor for this competition (use 0 for none): ")
+            val competitor = competitorAPI.getCompetitorById(competitorId)
+
+            if (competitorAPI.updateCompetition(
+                    indexToUpdate,
+                    Compete(date, title, category, place, numberOfWorkoutAttempted, numberOfWorkoutsCompleted, competitor)
+                )
+            ) {
+                println("Update Successful")
+            } else {
+                println("Update Failed")
+            }
+        } else {
+            println("There are no competitions for this index number")
+        }
+    } else {
+        println("No competitions stored")
     }
 }
 
