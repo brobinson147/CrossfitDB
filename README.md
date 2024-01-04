@@ -10,6 +10,7 @@ The Crossfit App is a command-line application designed to manage competitors an
   - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
+-  [Display](#display)
 - [License](#license)
 
 ## Features
@@ -65,6 +66,9 @@ Contributions are welcome! If you'd like to contribute to the project, please fo
 2. Create a new branch.
 3. Make your changes.
 4. Create a pull request.
+
+## Display
+
 
 ## License
 
