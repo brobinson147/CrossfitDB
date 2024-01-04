@@ -113,6 +113,24 @@ fun updateCompetition() {
     }
 }
 
+fun deleteCompetition() {
+    listCompetitions()
+
+    if (competitorAPI.numberOfCompetitions() > 0) {
+        val indexToDelete = readNextInt("Enter the index of the competition to delete: ")
+
+        val competitionToDelete = competitorAPI.deleteCompetition(indexToDelete)
+
+        if (competitionToDelete != null) {
+            println("Delete Successful! Deleted competition: ${competitionToDelete.title}")
+        } else {
+            println("Delete NOT Successful")
+        }
+    } else {
+        println("No competitions stored")
+    }
+}
+
 fun lastCompetitorId(): Int = competitorIdCounter.get()
 
 fun addCompetition() {
