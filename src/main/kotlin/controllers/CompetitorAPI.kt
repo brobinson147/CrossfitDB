@@ -60,7 +60,7 @@ class CompetitorAPI(serializerType: Serializer) {
     }
 
 
-    private fun isValidCompetitionIndex(index: Int): Boolean {
+    fun isValidCompetitionIndex(index: Int): Boolean {
         return (index >= 0 && index < competitions.size)
     }
 

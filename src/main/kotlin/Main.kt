@@ -142,7 +142,7 @@ fun deleteCompetition() {
 }
 
 fun archiveCompetition() {
-    listActiveCompetitions()
+    listCompetitions()
 
     if (competitorAPI.numberOfActiveCompetitions() > 0) {
         val indexToArchive = readNextInt("Enter the index of the competition to archive: ")
