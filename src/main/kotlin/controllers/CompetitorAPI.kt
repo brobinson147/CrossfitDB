@@ -85,6 +85,14 @@ class CompetitorAPI(serializerType: Serializer) {
         return competitors.toList()
     }
 
+    fun getCompetition(index: Int): Compete? {
+        return if (isValidCompetitionIndex(index)) {
+            competitions[index]
+        } else {
+            null
+        }
+    }
+
     @Throws(Exception::class)
     fun load() {
         // Load both competitors and competitions from the serializer
