@@ -32,6 +32,7 @@ fun mainMenu(): Int {
          > |   5) Update Competition            |
          > |   6) Archive Competition           |
          > |   7) Delete Competition            |
+         > |   8) Search Competitor by Name     |
          > -------------------------------------
          > 
          > |   20) Save Data                    |
@@ -53,6 +54,7 @@ fun runMenu() {
             5 -> updateCompetition()
             6 -> archiveCompetition()
             7 -> deleteCompetition()
+            8 -> searchCompetitorByName()
             20 -> saveData()
             21 -> loadData()
             0 -> exitApp()
@@ -83,6 +85,20 @@ fun listCompetitors() {
     } else {
         println("Competitors:")
         for ((index, competitor) in competitors.withIndex()) {
+            println("$index: $competitor")
+        }
+    }
+}
+
+fun searchCompetitorByName() {
+    val nameToSearch = readNextLine("Enter the name of the competitor to search: ")
+    val searchResults = competitorAPI.searchCompetitorByName(nameToSearch)
+
+    if (searchResults.isEmpty()) {
+        println("No competitors found with the name: $nameToSearch")
+    } else {
+        println("Search results for competitors with the name '$nameToSearch':")
+        for ((index, competitor) in searchResults.withIndex()) {
             println("$index: $competitor")
         }
     }
@@ -168,6 +184,7 @@ fun addCompetition() {
     val numberOfWorkoutsCompleted = readNextInt("Enter the number of workouts completed: ")
 
     val competitorId = readNextInt("Enter the ID of the competitor for this competition (use 0 for none): ")
+    println("Competitor ID: $competitorId")
     val competitor = competitorAPI.getCompetitorById(competitorId)
 
     if (competitor == null && competitorId != 0) {

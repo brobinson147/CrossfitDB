@@ -64,8 +64,13 @@ class CompetitorAPI(serializerType: Serializer) {
         return (index >= 0 && index < competitions.size)
     }
 
-    fun getCompetitorById(competitorId: Int): Competitor? {
-        return competitors.find { it.id == competitorId }
+    fun getCompetitorById(id: Int): Competitor? {
+        return competitors.firstOrNull { it.id == id }
+    }
+
+    fun searchCompetitorByName(name: String): List<Competitor> {
+        val searchResults = competitors.filter { competitor -> competitor.name.equals(name, ignoreCase = true) }
+        return searchResults.toList()
     }
 
     fun getAllCompetitions(): List<Compete> {
