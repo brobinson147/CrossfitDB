@@ -68,6 +68,10 @@ class CompetitorAPI(serializerType: Serializer) {
         return competitors.firstOrNull { it.id == id }
     }
 
+    fun numberOfCompetitors(): Int {
+        return competitors.size
+    }
+
     fun searchCompetitorByName(name: String): List<Competitor> {
         val searchResults = competitors.filter { competitor -> competitor.name.equals(name, ignoreCase = true) }
         return searchResults.toList()

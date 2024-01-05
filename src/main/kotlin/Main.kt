@@ -33,6 +33,7 @@ fun mainMenu(): Int {
          > |   6) Archive Competition           |
          > |   7) Delete Competition            |
          > |   8) Search Competitor by Name     |
+         > |   9) Show All Competitors          |
          > -------------------------------------
          > 
          > |   20) Save Data                    |
@@ -55,6 +56,7 @@ fun runMenu() {
             6 -> archiveCompetition()
             7 -> deleteCompetition()
             8 -> searchCompetitorByName()
+            9 -> showTotalCompetitors()
             20 -> saveData()
             21 -> loadData()
             0 -> exitApp()
@@ -88,6 +90,11 @@ fun listCompetitors() {
             println("$index: $competitor")
         }
     }
+}
+
+fun showTotalCompetitors() {
+    val totalCompetitors = competitorAPI.numberOfCompetitors()
+    println("Total number of competitors: $totalCompetitors")
 }
 
 fun searchCompetitorByName() {
